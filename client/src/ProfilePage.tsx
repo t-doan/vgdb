@@ -1,5 +1,5 @@
 import { CiMenuBurger } from 'react-icons/ci';
-import { FaChevronDown, FaChevronUp} from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp, FaThumbsUp, FaThumbsDown} from 'react-icons/fa';
 
 export function ProfilePage() {
   return (
@@ -7,11 +7,11 @@ export function ProfilePage() {
       <div className="ProfilePage w-[100%] h-[100%] bg-neutral-700 flex flex-wrap">
         <Header />
         <div className="UserProfile w-[100%] flex px-48 justify-between flex-wrap">
-          <AddList/>
+          <AddList />
           <ProfileBanner />
           <div className="ProfileBody">
-            <UserCollection/>
-
+            <UserCollection />
+            <Review/>
           </div>
         </div>
       </div>
@@ -152,220 +152,29 @@ function UserCollection(){
     </div>
   );
 }
-//     <div className="Collection1 w-[982px] h-[63.74px] left-[712px] top-[690.83px] absolute">
-//       <div className="Rectangle3 w-[982px] h-[60.30px] left-0 top-[3.45px] absolute bg-zinc-900 rounded-lg" />
-//       <div className="Played w-[189.51px] h-[60.30px] left-[34.46px] top-[18px] absolute text-white text-xl font-bold font-['Inter']">
-//         Played
-//       </div>
-//       <div className="ChevronUp w-[27.56px] h-[27.56px] left-[916.53px] top-[17.23px] absolute" />
-//     </div>
-//     <div className="Collection2 w-[982px] h-[63.74px] left-[712px] top-[797.65px] absolute">
-//       <div className="Rectangle3 w-[982px] h-[60.30px] left-0 top-[3.45px] absolute bg-zinc-900 rounded-lg" />
-//       <div className="IsWaiting w-[189.51px] h-[60.30px] left-[34.46px] top-[18px] absolute text-white text-xl font-bold font-['Inter']">
-//         Want To Play
-//       </div>
-//       <div className="ChevronUp w-[27.56px] h-[27.56px] left-[916.53px] top-[17.23px] absolute" />
-//     </div>
-//     <div className="FavoriteCollection w-[982px] h-[447.93px] left-[712px] top-[205px] absolute">
-//       <div className="Rectangle4 w-[982px] h-[406.58px] left-0 top-[41.35px] absolute bg-zinc-800 rounded-[17.23px]" />
-//       <div className="Banner w-[982px] h-[63.74px] left-0 top-0 absolute">
-//         <div className="Rectangle3 w-[982px] h-[60.30px] left-0 top-[3.45px] absolute bg-zinc-900 rounded-lg" />
-//         <div className="Favorites w-[189.51px] h-[60.30px] left-[34.46px] top-[-10px] absolute text-white text-xl font-bold font-['Inter']">
-//           <br />
-//           Favorites
-//           <br />
-//         </div>
-//         <div className="ChevronDown w-[27.56px] h-[27.56px] left-[944.10px] top-[51.68px] absolute origin-top-left -rotate-180" />
-//       </div>
-//       <div className="Row1 w-[918.26px] h-[156.78px] left-[32.73px] top-[87.86px] absolute">
-//         <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-0 top-0 absolute">
-//           <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//           <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//             Title 1
-//           </div>
-//         </div>
-//         <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[273.93px] top-[-0px] absolute">
-//           <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//           <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//             Title 1
-//           </div>
-//         </div>
-//         <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[137.82px] top-[-0px] absolute">
-//           <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//           <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//             Title 1
-//           </div>
-//         </div>
-//         <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[411.75px] top-[-0px] absolute">
-//           <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//           <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//             Title 1
-//           </div>
-//         </div>
-//         <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[685.68px] top-[-0px] absolute">
-//           <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//           <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//             Title 1
-//           </div>
-//         </div>
-//         <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[823.50px] top-[-0px] absolute">
-//           <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//           <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//             Title 1
-//           </div>
-//         </div>
-//         <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[549.58px] top-[-0px] absolute">
-//           <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//           <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//             Title 1
-//           </div>
-//         </div>
-//       </div>
-//       <div className="Row2 w-[918.26px] h-[156.78px] left-[32.73px] top-[285.99px] absolute">
-//         <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-0 top-0 absolute">
-//           <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//           <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//             Title 1
-//           </div>
-//         </div>
-//         <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[273.93px] top-[-0px] absolute">
-//           <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//           <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//             Title 1
-//           </div>
-//         </div>
-//         <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[137.82px] top-[-0px] absolute">
-//           <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//           <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//             Title 1
-//           </div>
-//         </div>
-//         <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[411.75px] top-[-0px] absolute">
-//           <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//           <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//             Title 1
-//           </div>
-//         </div>
-//         <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[685.68px] top-[-0px] absolute">
-//           <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//           <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//             Title 1
-//           </div>
-//         </div>
-//         <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[823.50px] top-[-0px] absolute">
-//           <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//           <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//             Title 1
-//           </div>
-//         </div>
-//         <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[549.58px] top-[-0px] absolute">
-//           <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//           <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//             Title 1
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//     <div className="Row1 w-[918.26px] h-[156.78px] left-[744.73px] top-[292.86px] absolute">
-//       <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-0 top-0 absolute">
-//         <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//         <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//           Title 1
-//         </div>
-//       </div>
-//       <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[273.93px] top-[-0px] absolute">
-//         <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//         <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//           Title 1
-//         </div>
-//       </div>
-//       <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[137.82px] top-[-0px] absolute">
-//         <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//         <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//           Title 1
-//         </div>
-//       </div>
-//       <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[411.75px] top-[-0px] absolute">
-//         <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//         <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//           Title 1
-//         </div>
-//       </div>
-//       <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[685.68px] top-[-0px] absolute">
-//         <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//         <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//           Title 1
-//         </div>
-//       </div>
-//       <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[823.50px] top-[-0px] absolute">
-//         <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//         <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//           Title 1
-//         </div>
-//       </div>
-//       <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[549.58px] top-[-0px] absolute">
-//         <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//         <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//           Title 1
-//         </div>
-//       </div>
-//     </div>
-//     <div className="Row2 w-[918.26px] h-[156.78px] left-[744.73px] top-[490.99px] absolute">
-//       <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-0 top-0 absolute">
-//         <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//         <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//           Title 1
-//         </div>
-//       </div>
-//       <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[273.93px] top-[-0px] absolute">
-//         <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//         <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//           Title 1
-//         </div>
-//       </div>
-//       <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[137.82px] top-[-0px] absolute">
-//         <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//         <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//           Title 1
-//         </div>
-//       </div>
-//       <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[411.75px] top-[-0px] absolute">
-//         <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//         <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//           Title 1
-//         </div>
-//       </div>
-//       <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[685.68px] top-[-0px] absolute">
-//         <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//         <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//           Title 1
-//         </div>
-//       </div>
-//       <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[823.50px] top-[-0px] absolute">
-//         <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//         <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//           Title 1
-//         </div>
-//       </div>
-//       <div className="GamePlaceholder w-[94.75px] h-[156.78px] left-[549.58px] top-[-0px] absolute">
-//         <div className="Rectangle5 w-[94.75px] h-[129.21px] left-0 top-0 absolute bg-zinc-300" />
-//         <div className="Title1 w-[64.36px] h-[13.78px] left-[14.30px] top-[142.99px] absolute text-white text-xl font-bold font-['Inter']">
-//           Title 1
-//         </div>
-//       </div>
-//     </div>
-//     <div className="ReviewsHeader w-[267.04px] h-[60.30px] left-[712px] top-[923.41px] absolute text-white text-[34.46px] font-bold font-['Inter']">
-//       Reviews
-//     </div>
-//     <div className="Review1 w-[982px] h-[180.89px] left-[712px] top-[1000.94px] absolute">
-//       <div className="Rectangle6 w-[982px] h-[180.89px] left-0 top-0 absolute bg-zinc-800 rounded-lg" />
-//       <div className="GameTitle w-[222.24px] h-[51.68px] left-[163.67px] top-[13.78px] absolute text-white text-[27.56px] font-bold font-['Inter']">
-//         Game Title
-//       </div>
-//       <div className="Rectangle5 w-[94.75px] h-[129.21px] left-[32.73px] top-[25.84px] absolute bg-zinc-300 rounded-lg" />
-//       <div className="Ellipse3 w-[51.68px] h-[51.68px] left-[883.80px] top-[13.78px] absolute bg-green-500 bg-opacity-50 rounded-full" />
-//       <div className="WasGoodGame w-[752.87px] h-[68.91px] left-[165.39px] top-[86.14px] absolute text-white text-lg font-normal font-['Inter']">
-//         Was good game
-//       </div>
-//     </div>
-//   </div>
+
+function Review(){
+  return (
+    <div className="ReviewList">
+      <h1 className="w-[267.04px] h-[60.30px] text-white text-[34.46px] font-bold">
+        Reviews
+      </h1>
+      <div className="w-[982px] h-[220.89px] bg-zinc-800 rounded-lg px-5">
+        <div className="ReviewHeader flex justify-between items-center">
+          <h1 className="w-[222.24px] h-[51.68px] text-white text-[27.56px] font-bold">
+            Game Title
+          </h1>
+          <FaThumbsUp color="green" size={'2rem'} />
+        </div>
+        <div className="ReviewBody flex justify-around">
+          <img
+            className="Rectangle5 w-[94.75px] h-[129.21px] bg-zinc-300"
+            src="https://image.api.playstation.com/vulcan/img/cfn/11307uYG0CXzRuA9aryByTHYrQLFz-HVQ3VVl7aAysxK15HMpqjkAIcC_R5vdfZt52hAXQNHoYhSuoSq_46_MT_tDBcLu49I.png"
+            alt="placeholder"
+          />
+          <p className="ReviewText w-[752.87px] h-[130.91px] text-white text-lg font-normal overflow-y-scroll"></p>
+        </div>
+      </div>
+    </div>
+  );
+}

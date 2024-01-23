@@ -2,6 +2,6 @@
   box-sizing: border-box;
 }
 
-.playList::-webkit-scrollbar{
+.playList::-webkit-scrollbar, .ReviewText::-webkit-scrollbar{
   display:none;
 }
