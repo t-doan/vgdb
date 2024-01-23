@@ -1,5 +1,6 @@
 import { CiMenuBurger } from 'react-icons/ci';
 import { FaChevronDown, FaChevronUp, FaThumbsUp, FaThumbsDown} from 'react-icons/fa';
+import './ProfilePage.css'
 
 export function ProfilePage() {
   return (
@@ -19,7 +20,7 @@ export function ProfilePage() {
   );
 }
 
-function Header(){
+export function Header(){
   return (
     <div className="Header w-[100%] h-[140px] bg-neutral-900 flex justify-evenly items-center ">
       <div className="Menu w-[140px] h-[63px] text-center text-white text-2xl font-normal flex justify-center items-center">

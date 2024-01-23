@@ -1,0 +1,3 @@
+.playList::-webkit-scrollbar, .ReviewText::-webkit-scrollbar{
+  display:none;
+}

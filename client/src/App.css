@@ -1,7 +1,3 @@
 *{
   box-sizing: border-box;
 }
-
-.playList::-webkit-scrollbar, .ReviewText::-webkit-scrollbar{
-  display:none;
-}
