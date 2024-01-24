@@ -29,8 +29,22 @@ app.use(express.static(reactStaticDir));
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello, World!' });
+app.get('/apiData',  async (req, res, next) => {
+  try{
+    const response = await fetch(
+      'https://api.rawg.io/api/games?key=4a4f8ba8aaa144ff98854ca97003b2e2'
+    );
+    if (!response.ok){
+      next(Error);
+    }
+    else{
+      const result = await response.json();
+      res.json(result);
+    }
+  }
+  catch(e){
+    next(e);
+  }
 });
 
 /*
