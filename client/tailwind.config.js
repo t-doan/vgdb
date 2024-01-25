@@ -1,8 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
+  ],
+
   theme: {
-    container:{
+    container: {
       screens: {
         sm: '640px',
         md: '768px',
@@ -12,8 +17,8 @@ export default {
         '3xl': '1920px',
       },
     },
-    extend: {
-    },
+    extend: {},
   },
-  plugins: [],
+  // eslint-disable-next-line no-undef
+  plugins: [require('daisyui'), require('flowbite/plugin')],
 };

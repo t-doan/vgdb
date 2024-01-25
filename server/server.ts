@@ -29,10 +29,11 @@ app.use(express.static(reactStaticDir));
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
-app.get('/apiData',  async (req, res, next) => {
+app.get('/apiData/:page',  async (req, res, next) => {
   try{
+    const pageNumber = +req.params.page;
     const response = await fetch(
-      'https://api.rawg.io/api/games?key=4a4f8ba8aaa144ff98854ca97003b2e2'
+      `https://api.rawg.io/api/games?key=4a4f8ba8aaa144ff98854ca97003b2e2&page_size=40&page=${pageNumber}`
     );
     if (!response.ok){
       next(Error);
