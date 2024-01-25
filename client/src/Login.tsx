@@ -1,4 +1,4 @@
-import { Header } from "./ProfilePage";
+import { Header } from "./Header";
 import "./App.css"
 
 export function Login(){

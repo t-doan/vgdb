@@ -15,21 +15,22 @@ export function Home(){
     <>
       <Header />
       <ListAllGame />
-      <Pagination/>
+      <Modal/>
     </>
   );
 }
 
 
 function ListAllGame() {
-  const [page, setPage] = useState(1);
-  const [games, setGames] = useState<Game>([]);
+  const [currentPage, setPage] = useState(1);
+  const [currentGames, setGames] = useState<Game[]>([]);
   const [error, setError] = useState<unknown>();
+  const [isLoading, setLoading] = useState<boolean>();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/apiData/${page}`);
+        const response = await fetch(`/apiData/${currentPage}`);
         if (!response.ok) {
           throw new Error(`Error ${response.status}`);
         }
@@ -38,33 +39,64 @@ function ListAllGame() {
       } catch (error) {
         setError(error);
       }
+      finally{
+        setLoading(false)
+      }
     };
     fetchData();
-  }, [page]);
+  }, [currentPage]);
+
+   if (isLoading) {
+     return <div>Loading...</div>;
+   }
+   if (error) {
+     console.error('Fetch error:', error);
+     return (
+       <div>
+         Error! {error instanceof Error ? error.message : 'Unknown error'}
+       </div>
+     );
+   }
+
+  return (
+    <>
+      <Card GameList={currentGames} />
+      <Pagination currentPage={currentPage} setPage={setPage} />
+    </>
+  );
+}
+
+type CardProp = {
+  GameList:Game[]
+}
+function Card( {GameList}: CardProp){
 
   const temp:JSX.Element[] = [];
-  for (let i = 0; i < games.length; i++) {
+  for (let i = 0; i < GameList.length; i++) {
    temp.push(
-     <li className="w-96 mb-11 hover:cursor-pointer" key={games[i].id}>
-       <h1 className="text-white text-xl font-semibold hover:underline hover:text-yellow-200">
-         {games[i].name}
+     <li className="w-96 mb-11 hover:cursor-pointer" key={GameList[i].id}>
+       <h1
+         onClick={() => document.getElementById('my_modal_4').showModal()}
+         className="text-white text-xl font-semibold hover:underline hover:text-yellow-200">
+         {GameList[i].name}
          <img
            className="size-5/6"
            src={
-             games[i].background_image ??
+             GameList[i].background_image ??
              'https://static.thenounproject.com/png/2932881-200.png'
            }
-           alt={games[i].name}
+           alt={GameList[i].name}
          />
        </h1>
      </li>
    );
   }
-
   return (
-    <div className="container mx-auto mt-11">
-      <ul className="flex flex-wrap justify-center">{temp}</ul>
-    </div>
+    <>
+      <div className="container mx-auto mt-11">
+        <ul className="flex flex-wrap justify-center">{temp}</ul>
+      </div>
+    </>
   );
 }
 
@@ -101,24 +133,88 @@ export function AppDrawer() {
   );
 }
 
-// function PrevButton(){
-
-// }
-
-// function NextButton(){
-
-// }
-
-// function PageNumber(){
-
-// }
-
-function Pagination(){
+type PaginationProps = {
+  currentPage:number;
+  setPage:(x:number) => void;
+}
+function Pagination( {currentPage, setPage}: PaginationProps) {
   return (
     <div className="join flex justify-center">
-      <button className="join-item btn">Prev</button>
-      <button className="join-item btn">Page 01</button>
-      <button className="join-item btn">Next</button>
+      <PrevButton onPrev={() => {if(currentPage - 1 !== 0) setPage(currentPage - 1)}}/>
+      <label className="join-item btn btn-ghost">Page {currentPage}</label>
+      <NextButton onNext={() => setPage(currentPage + 1)} />
     </div>
   );
 }
+
+type PrevButtonProps = {
+  onPrev:() => void;
+}
+function PrevButton({onPrev}: PrevButtonProps){
+  return <button onClick={onPrev} className="join-item btn">Prev</button>;
+}
+
+type NextButtonProps = {
+  onNext: () => void;
+};
+function NextButton({ onNext }: NextButtonProps) {
+  return (
+    <button onClick={onNext} className="join-item btn">
+      Next
+    </button>
+  );
+}
+
+function Modal(){
+    const [currentCard, setCurrentCard] = useState<Game>();
+    const [error, setError] = useState<unknown>();
+    const [isLoading, setLoading] = useState<boolean>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/apiData/${currentCard}`);
+        if (!response.ok) {
+          throw new Error(`Error ${response.status}`);
+        }
+        const items = await response.json();
+        setCurrentCard(items.results);
+      } catch (e) {
+        setError(e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [currentCard]);
+
+  console.log(currentCard);
+
+  return (
+    <dialog id="my_modal_4">
+      <div className="w-[90vw] h-[85vh] z-50 bg-transparent transition-transform overscroll-contain">
+        <div>
+        </div>
+      </div>
+      <div className="modal-action">
+        <form method="dialog">
+          <button>Close</button>
+        </form>
+      </div>
+    </dialog>
+  );
+}
+
+
+      // <dialog id="my_modal_4" className="modal absolute z-10">
+      //   <div className="modal-box">
+      //     <h3 className="font-bold text-lg">Hello!</h3>
+      //     <p className="py-4">Click the button below to close</p>
+          // <div className="modal-action">
+          //   <form method="dialog">
+          //     {/* if there is a button, it will close the modal */}
+          //     <button className="btn">Close</button>
+          //   </form>
+          // </div>
+      //   </div>
+      // </dialog>
