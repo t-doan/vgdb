@@ -3,6 +3,7 @@ import './App.css'
 import { Login } from "./Login";
 import { Home } from "./HomePage";
 import { Routes, Route } from 'react-router-dom';
+import { GameDetail } from "./GameDetail";
 
 export default function App() {
 
@@ -11,6 +12,7 @@ export default function App() {
       <Route path="/" element={<Home/>}/>
       <Route path="/user" element={<ProfilePage />}/>
       <Route path="/login" element={ <Login />}/>
+      <Route path="/details/:gameId" element={<GameDetail/>}/>
     </Routes>
   );
 }

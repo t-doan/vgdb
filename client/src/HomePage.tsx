@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Header } from "./Header";
 import { FaBars } from 'react-icons/fa';
+import { Link } from "react-router-dom";
 
-type Game = {
+export type Game = {
   id: number;
   name: string;
   description ?: string;
@@ -15,7 +16,6 @@ export function Home(){
     <>
       <Header />
       <ListAllGame />
-      <Modal/>
     </>
   );
 }
@@ -73,10 +73,11 @@ function Card( {GameList}: CardProp){
 
   const temp:JSX.Element[] = [];
   for (let i = 0; i < GameList.length; i++) {
+    // console.log(GameList[0]);
    temp.push(
-     <li className="w-96 mb-11 hover:cursor-pointer" key={GameList[i].id}>
+    <Link to={`/details/${GameList[i].id}`} state={{game:GameList[i]}} key={GameList[i].id} >
+    <li className="w-96 mb-11 hover:cursor-pointer">
        <h1
-         onClick={() => document.getElementById('my_modal_4').showModal()}
          className="text-white text-xl font-semibold hover:underline hover:text-yellow-200">
          {GameList[i].name}
          <img
@@ -89,6 +90,7 @@ function Card( {GameList}: CardProp){
          />
        </h1>
      </li>
+     </Link>
    );
   }
   return (
@@ -164,57 +166,3 @@ function NextButton({ onNext }: NextButtonProps) {
     </button>
   );
 }
-
-function Modal(){
-    const [currentCard, setCurrentCard] = useState<Game>();
-    const [error, setError] = useState<unknown>();
-    const [isLoading, setLoading] = useState<boolean>();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`/apiData/${currentCard}`);
-        if (!response.ok) {
-          throw new Error(`Error ${response.status}`);
-        }
-        const items = await response.json();
-        setCurrentCard(items.results);
-      } catch (e) {
-        setError(e);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, [currentCard]);
-
-  console.log(currentCard);
-
-  return (
-    <dialog id="my_modal_4">
-      <div className="w-[90vw] h-[85vh] z-50 bg-transparent transition-transform overscroll-contain">
-        <div>
-        </div>
-      </div>
-      <div className="modal-action">
-        <form method="dialog">
-          <button>Close</button>
-        </form>
-      </div>
-    </dialog>
-  );
-}
-
-
-      // <dialog id="my_modal_4" className="modal absolute z-10">
-      //   <div className="modal-box">
-      //     <h3 className="font-bold text-lg">Hello!</h3>
-      //     <p className="py-4">Click the button below to close</p>
-          // <div className="modal-action">
-          //   <form method="dialog">
-          //     {/* if there is a button, it will close the modal */}
-          //     <button className="btn">Close</button>
-          //   </form>
-          // </div>
-      //   </div>
-      // </dialog>

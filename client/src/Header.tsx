@@ -38,6 +38,7 @@ export function Header() {
           </h2>
         </div>
       </div>
+      <Outlet />
     </div>
   );
 }
