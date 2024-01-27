@@ -4,7 +4,7 @@ import { Header } from './Header';
 
 export function ProfilePage() {
   return (
-    <div className="container mx-auto flex">
+    <div className="container flex">
       <div className="ProfilePage w-[100vw] h-[100vh] bg-neutral-700 flex flex-wrap">
         <Header />
         <div className="UserProfile w-[100vw] flex px-48 justify-between flex-wrap">

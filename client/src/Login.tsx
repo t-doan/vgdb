@@ -12,7 +12,7 @@ export function Login(){
 
 function RegisterForm(){
   return (
-    <div className="container mx-auto mt-28 flex justify-center">
+    <div className="container mt-28 flex justify-center">
       <div className="w-96 h-60 bg-black ">
         <div className="row flex justify-between">
           <div>

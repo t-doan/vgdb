@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 export type Game = {
   id: number;
   name: string;
-  description ?: string;
   background_image: string;
   released ?: string;
 };
@@ -95,7 +94,7 @@ function Card( {GameList}: CardProp){
   }
   return (
     <>
-      <div className="container mx-auto mt-11">
+      <div className="container mt-11">
         <ul className="flex flex-wrap justify-center">{temp}</ul>
       </div>
     </>
