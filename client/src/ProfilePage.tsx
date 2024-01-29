@@ -1,5 +1,6 @@
-import { FaChevronDown, FaChevronUp, FaThumbsUp, FaThumbsDown, FaBars} from 'react-icons/fa';
-import './ProfilePage.css'
+import { FaChevronDown, FaThumbsUp } from 'react-icons/fa';
+// FaChevronUp; FaChevronUp; FaBars;
+import './ProfilePage.css';
 import { Header } from './Header';
 
 export function ProfilePage() {
@@ -12,7 +13,7 @@ export function ProfilePage() {
           <ProfileBanner />
           <div className="ProfileBody">
             <UserCollection />
-            <Review/>
+            <Review />
           </div>
         </div>
       </div>
@@ -20,7 +21,7 @@ export function ProfilePage() {
   );
 }
 
-function ProfileBanner(){
+function ProfileBanner() {
   return (
     <div className="ProfileBanner w-[371px] h-[775px]">
       <div className="BannerContainer w-[371px] h-[775px] bg-gray-600 rounded-[42px] flex flex-col justify-evenly items-center">
@@ -56,19 +57,19 @@ function ProfileBanner(){
   );
 }
 
-function UserPlaylist(){
+function UserPlaylist() {
   return (
     <li className="FavoriteCollection w-[982px] h-[447.93px] mb-8">
       <div className="w-[982px] h-[60.30px]  bg-zinc-900 rounded-lg flex p-4 justify-between items-center">
         <h1 className="text-white text-xl text-center p-[12px]">Favorite</h1>
         <FaChevronDown size="1.5rem" color="white" />
       </div>
-      <ListGames/>
+      <ListGames />
     </li>
   );
 }
 
-function ListGames(){
+function ListGames() {
   return (
     <div className="CollectionBox w-[982px] h-[406.58px] bg-zinc-800 rounded-[17.23px] pl-10 pr-6 pt-4 pb-4">
       <ul className="playList flex flex-wrap overflow-y-scroll h-[375px] ">
@@ -78,9 +79,9 @@ function ListGames(){
   );
 }
 
-function GameCard(){
+function GameCard() {
   return (
-    <li className='block p-[1rem] float-left'>
+    <li className="block p-[1rem] float-left">
       <div className="w-[94.75px] h-[156.78px]">
         <img
           className="Rectangle5 w-[94.75px] h-[129.21px] bg-zinc-300"
@@ -95,7 +96,7 @@ function GameCard(){
   );
 }
 
-function AddList(){
+function AddList() {
   return (
     <div className="w-[100%] h-[5rem] flex justify-end items-center">
       <button
@@ -107,7 +108,7 @@ function AddList(){
   );
 }
 
-function UserCollection(){
+function UserCollection() {
   return (
     <div className="userCollection">
       <ul>
@@ -117,7 +118,7 @@ function UserCollection(){
   );
 }
 
-function Review(){
+function Review() {
   return (
     <div className="ReviewList">
       <h1 className="w-[267.04px] h-[60.30px] text-white text-[34.46px] font-bold">

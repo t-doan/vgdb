@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import { useLocation} from "react-router-dom";
-import { Header } from "./Header";
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Header } from './Header';
 
 type GameEntry = {
-  name:string;
-  id:number;
-  released:string;
-  background_image:string;
-  description_raw:string;
-  developers:string[];
-  publishers:string[];
-  genres:string[];
-  tags:string[];
-}
+  name: string;
+  id: number;
+  released: string;
+  background_image: string;
+  description_raw: string;
+  developers: string[];
+  publishers: string[];
+  genres: string[];
+  tags: string[];
+};
 
-export function GameDetail(){
-  const {state} = useLocation();
+export function GameDetail() {
+  const { state } = useLocation();
   const gameId = state.game.id;
   const [game, onGame] = useState<GameEntry>();
   const [error, setError] = useState<unknown>();
@@ -41,19 +41,19 @@ export function GameDetail(){
     fetchData();
   }, [gameId]);
 
-   if (isLoading) return <div>Loading...</div>;
-   if (error)
-     return (
-       <div>
-         Error Loading Game {gameId}:{' '}
-         {error instanceof Error ? error.message : 'Unknown Error'}
-       </div>
-     );
-   if (!game) return null;
+  if (isLoading) return <div>Loading...</div>;
+  if (error)
+    return (
+      <div>
+        Error Loading Game {gameId}:{' '}
+        {error instanceof Error ? error.message : 'Unknown Error'}
+      </div>
+    );
+  if (!game) return null;
 
-   const developer = game.developers[0].name;
-   const publisher = game.publishers[0].name;
-  // console.log(game.publishers)
+  const developerName = game.developers[0]['name'];
+  const publisherName = game.publishers[0]['name'];
+  console.log(game.publishers);
 
   return (
     <>
@@ -68,8 +68,8 @@ export function GameDetail(){
           </div>
           <div className="col-2 flex">
             <div>
-              <h1>Developer: {developer}</h1>
-              <h1>Publisher: {publisher}</h1>
+              <h1>Developer: {developerName}</h1>
+              <h1>Publisher: {publisherName}</h1>
               <h1 className="text-yellow-200">Released: {game.released}</h1>
             </div>
             <div>
@@ -91,32 +91,32 @@ export function GameDetail(){
   );
 }
 
-type TagsProps ={
-  tagList:string[]
-}
-function Tags({tagList}: TagsProps){
-  const tag:JSX.Element[] = [];
-  for (let i = 0; i< tagList.length; i++){
+type TagsProps = {
+  tagList: string[];
+};
+function Tags({ tagList }: TagsProps) {
+  const tag: JSX.Element[] = [];
+  for (let i = 0; i < tagList.length; i++) {
     tag.push(
-      <li key={tagList[i].id} className="text-pink-300">{tagList[i].name}</li>
-    )
+      <li key={tagList[i]['id']} className="text-pink-300">
+        {tagList[i]['name']}
+      </li>
+    );
   }
-  return(
-    <ul className="columns-3">{tag}</ul>
-  );
+  return <ul className="columns-3">{tag}</ul>;
 }
 
-type GenreProps ={
-  genresList:string[]
-}
-function Genres({genresList}: GenreProps){
-  const genres:JSX.Element[] = [];
-  for (let i = 0; i< genresList.length; i++){
+type GenreProps = {
+  genresList: string[];
+};
+function Genres({ genresList }: GenreProps) {
+  const genres: JSX.Element[] = [];
+  for (let i = 0; i < genresList.length; i++) {
     genres.push(
-      <li key={genresList[i].id} className="text-red-600">{genresList[i].name}</li>
-    )
+      <li key={genresList[i]['id']} className="text-red-600">
+        {genresList[i]['name']}
+      </li>
+    );
   }
-  return(
-    <ul>{genres}</ul>
-  );
+  return <ul>{genres}</ul>;
 }

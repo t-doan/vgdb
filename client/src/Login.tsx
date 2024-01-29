@@ -1,16 +1,17 @@
-import { Header } from "./Header";
-import "./App.css"
+import { Header } from './Header';
+import './App.css';
 
-export function Login(){
+export function Login() {
   return (
     <>
       <Header />
-      <RegisterForm/>
+      <RegisterForm />
+      <LoginForm />
     </>
   );
 }
 
-function RegisterForm(){
+function RegisterForm() {
   return (
     <div className="container mt-28 flex justify-center">
       <div className="w-96 h-60 bg-black ">
@@ -51,9 +52,7 @@ function LoginForm() {
       <div className="w-96 h-60 bg-black ">
         <div className="row flex justify-between">
           <div>
-            <h1 className="w-96 text-white text-2xl text-center">
-              Login
-            </h1>
+            <h1 className="w-96 text-white text-2xl text-center">Login</h1>
             <form className="flex flex-col content-center flex-wrap p-4">
               <div>
                 <label className="text-white text-2xl">Username</label>
