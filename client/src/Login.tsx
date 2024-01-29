@@ -1,10 +1,8 @@
-import { Header } from './Header';
 import './App.css';
 
 export function Login() {
   return (
     <>
-      <Header />
       <RegisterForm />
       <LoginForm />
     </>

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Header } from './Header';
 
 type GameEntry = {
   name: string;
@@ -56,38 +55,35 @@ export function GameDetail() {
   console.log(game.publishers);
 
   return (
-    <>
-      <Header />
-      <div className=" px-48 mt-11">
-        <div className="row">
-          <h1 className="text-white font-bold text-6xl mb-11">{game.name}</h1>
+    <div className=" px-48 mt-11">
+      <div className="row">
+        <h1 className="text-white font-bold text-6xl mb-11">{game.name}</h1>
+      </div>
+      <div className="row flex">
+        <div className="col-1 w-[762px] h-[428px]">
+          <img className="" src={game.background_image} alt={game.name} />
         </div>
-        <div className="row flex">
-          <div className="col-1 w-[762px] h-[428px]">
-            <img className="" src={game.background_image} alt={game.name} />
+        <div className="col-2 flex">
+          <div>
+            <h1>Developer: {developerName}</h1>
+            <h1>Publisher: {publisherName}</h1>
+            <h1 className="text-yellow-200">Released: {game.released}</h1>
           </div>
-          <div className="col-2 flex">
-            <div>
-              <h1>Developer: {developerName}</h1>
-              <h1>Publisher: {publisherName}</h1>
-              <h1 className="text-yellow-200">Released: {game.released}</h1>
-            </div>
-            <div>
-              <h1>Genres</h1>
-              <Genres genresList={game.genres} />
-            </div>
-            <div>
-              <h1>Tags</h1>
-              <Tags tagList={game.tags} />
-            </div>
+          <div>
+            <h1>Genres</h1>
+            <Genres genresList={game.genres} />
           </div>
-        </div>
-        <div className="">
-          <h1>Description</h1>
-          <h1 className="text-green-300">{game.description_raw}</h1>
+          <div>
+            <h1>Tags</h1>
+            <Tags tagList={game.tags} />
+          </div>
         </div>
       </div>
-    </>
+      <div className="">
+        <h1>Description</h1>
+        <h1 className="text-green-300">{game.description_raw}</h1>
+      </div>
+    </div>
   );
 }
 

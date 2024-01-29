@@ -1,24 +1,17 @@
-import { useEffect, useState } from "react";
-import { Header } from "./Header";
+import { useEffect, useState } from 'react';
 import { FaBars } from 'react-icons/fa';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export type Game = {
   id: number;
   name: string;
   background_image: string;
-  released ?: string;
+  released?: string;
 };
 
-export function Home(){
-  return (
-    <>
-      <Header />
-      <ListAllGame />
-    </>
-  );
+export function Home() {
+  return <ListAllGame />;
 }
-
 
 function ListAllGame() {
   const [currentPage, setPage] = useState(1);
@@ -37,25 +30,24 @@ function ListAllGame() {
         setGames(items.results);
       } catch (error) {
         setError(error);
-      }
-      finally{
-        setLoading(false)
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, [currentPage]);
 
-   if (isLoading) {
-     return <div>Loading...</div>;
-   }
-   if (error) {
-     console.error('Fetch error:', error);
-     return (
-       <div>
-         Error! {error instanceof Error ? error.message : 'Unknown error'}
-       </div>
-     );
-   }
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    console.error('Fetch error:', error);
+    return (
+      <div>
+        Error! {error instanceof Error ? error.message : 'Unknown error'}
+      </div>
+    );
+  }
 
   return (
     <>
@@ -66,31 +58,32 @@ function ListAllGame() {
 }
 
 type CardProp = {
-  GameList:Game[]
-}
-function Card( {GameList}: CardProp){
-
-  const temp:JSX.Element[] = [];
+  GameList: Game[];
+};
+function Card({ GameList }: CardProp) {
+  const temp: JSX.Element[] = [];
   for (let i = 0; i < GameList.length; i++) {
     // console.log(GameList[0]);
-   temp.push(
-    <Link to={`/details/${GameList[i].id}`} state={{game:GameList[i]}} key={GameList[i].id} >
-    <li className="w-96 mb-11 hover:cursor-pointer">
-       <h1
-         className="text-white text-xl font-semibold hover:underline hover:text-yellow-200">
-         {GameList[i].name}
-         <img
-           className="size-5/6"
-           src={
-             GameList[i].background_image ??
-             'https://static.thenounproject.com/png/2932881-200.png'
-           }
-           alt={GameList[i].name}
-         />
-       </h1>
-     </li>
-     </Link>
-   );
+    temp.push(
+      <Link
+        to={`/details/${GameList[i].id}`}
+        state={{ game: GameList[i] }}
+        key={GameList[i].id}>
+        <li className="w-96 mb-11 hover:cursor-pointer">
+          <h1 className="text-white text-xl font-semibold hover:underline hover:text-yellow-200">
+            {GameList[i].name}
+            <img
+              className="size-5/6"
+              src={
+                GameList[i].background_image ??
+                'https://static.thenounproject.com/png/2932881-200.png'
+              }
+              alt={GameList[i].name}
+            />
+          </h1>
+        </li>
+      </Link>
+    );
   }
   return (
     <>
@@ -135,13 +128,17 @@ export function AppDrawer() {
 }
 
 type PaginationProps = {
-  currentPage:number;
-  setPage:(x:number) => void;
-}
-function Pagination( {currentPage, setPage}: PaginationProps) {
+  currentPage: number;
+  setPage: (x: number) => void;
+};
+function Pagination({ currentPage, setPage }: PaginationProps) {
   return (
     <div className="join flex justify-center">
-      <PrevButton onPrev={() => {if(currentPage - 1 !== 0) setPage(currentPage - 1)}}/>
+      <PrevButton
+        onPrev={() => {
+          if (currentPage - 1 !== 0) setPage(currentPage - 1);
+        }}
+      />
       <label className="join-item btn btn-ghost">Page {currentPage}</label>
       <NextButton onNext={() => setPage(currentPage + 1)} />
     </div>
@@ -149,10 +146,14 @@ function Pagination( {currentPage, setPage}: PaginationProps) {
 }
 
 type PrevButtonProps = {
-  onPrev:() => void;
-}
-function PrevButton({onPrev}: PrevButtonProps){
-  return <button onClick={onPrev} className="join-item btn">Prev</button>;
+  onPrev: () => void;
+};
+function PrevButton({ onPrev }: PrevButtonProps) {
+  return (
+    <button onClick={onPrev} className="join-item btn">
+      Prev
+    </button>
+  );
 }
 
 type NextButtonProps = {
