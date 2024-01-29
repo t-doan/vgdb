@@ -29,9 +29,42 @@ app.use(express.static(reactStaticDir));
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello, World!' });
+app.get('/apiData/:page',  async (req, res, next) => {
+  try{
+    const pageNumber = +req.params.page;
+    const response = await fetch(
+      `https://api.rawg.io/api/games?key=4a4f8ba8aaa144ff98854ca97003b2e2&page_size=20&page=${pageNumber}`
+    );
+    if (!response.ok){
+      next(Error);
+    }
+    else{
+      const result = await response.json();
+      res.json(result);
+    }
+  }
+  catch(e){
+    next(e);
+  }
 });
+
+app.get('/apiData/:id', async (req, res, next) => {
+  try {
+    const gameId = +req.params.id;
+    const response = await fetch(
+      `https://api.rawg.io/api/games/${gameId}?key=4a4f8ba8aaa144ff98854ca97003b2e2`
+    );
+    if (!response.ok) {
+      next(Error);
+    } else {
+      const result = await response.json();
+      res.json(result);
+    }
+  } catch (e) {
+    next(e);
+  }
+});
+
 
 /*
  * Middleware that handles paths that aren't handled by static middleware
