@@ -20,7 +20,7 @@ export function Header() {
         </div>
       </div>
       <div className="UserCorner w-[264px] h-[63px] flex flex-wrap justify-around">
-        <Link to="user">
+        <Link to="/user">
           <div className="CornerPic w-[63px] h-[63px] bg-zinc-300 rounded-full">
             <img
               className="w-[63px] h-[63px] rounded-full"
