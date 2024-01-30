@@ -5,7 +5,7 @@ import './ProfilePage.css';
 export function ProfilePage() {
   return (
     <div className="container flex">
-      <div className="ProfilePage w-[100vw] h-[100vh] bg-neutral-700 flex flex-wrap">
+      <div className="ProfilePage w-[100vw] h-[100vh] flex flex-wrap">
         <div className="UserProfile w-[100vw] flex px-48 justify-between flex-wrap">
           <AddList />
           <ProfileBanner />
