@@ -12,7 +12,9 @@ CREATE TABLE "users" (
   "password" text,
   "profileImage" text,
   "createdAt" date,
-  "bio" text
+  "bio" text,
+  "currentPlay" text[],
+  "gamePlayed" int
 );
 
 CREATE TABLE "games" (

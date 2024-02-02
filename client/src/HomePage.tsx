@@ -22,7 +22,7 @@ function ListAllGame() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/apiData/${currentPage}`);
+        const response = await fetch(`/api/games/${currentPage}`);
         if (!response.ok) {
           throw new Error(`Error ${response.status}`);
         }
@@ -63,7 +63,6 @@ type CardProp = {
 function Card({ GameList }: CardProp) {
   const temp: JSX.Element[] = [];
   for (let i = 0; i < GameList.length; i++) {
-    // console.log(GameList[0]);
     temp.push(
       <Link
         to={`/details/${GameList[i].id}`}
