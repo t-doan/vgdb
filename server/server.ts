@@ -36,12 +36,13 @@ app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
 const targetUrl = 'https://api.rawg.io/api/games';
+const key = '4a4f8ba8aaa144ff98854ca97003b2e2';
 
 app.get('/api/games/:page', async (req, res, next) => {
   try {
     const pageNumber = +req.params.page;
     const response = await fetch(
-      `${targetUrl}?key=4a4f8ba8aaa144ff98854ca97003b2e2&page_size=20&page=${pageNumber}`
+      `${targetUrl}?key=${key}&page_size=20&page=${pageNumber}`
     );
     if (!response.ok) {
       next(new Error(response.status.toString()));
@@ -57,9 +58,7 @@ app.get('/api/games/:page', async (req, res, next) => {
 app.get('/api/details/:id', async (req, res, next) => {
   try {
     const gameId = +req.params.id;
-    const response = await fetch(
-      `${targetUrl}/${gameId}?key=4a4f8ba8aaa144ff98854ca97003b2e2`
-    );
+    const response = await fetch(`${targetUrl}/${gameId}?key=${key}`);
     if (!response.ok) {
       next(new Error(response.status.toString()));
     } else {
@@ -74,9 +73,7 @@ app.get('/api/details/:id', async (req, res, next) => {
 app.get('/api/search', async (req, res, next) => {
   try {
     const { query } = req.query;
-    const response = await fetch(
-      `${targetUrl}?key=4a4f8ba8aaa144ff98854ca97003b2e2&search=${query}`
-    );
+    const response = await fetch(`${targetUrl}?key=${key}&search=${query}`);
 
     if (!response.ok) {
       next(new Error(response.status.toString()));
