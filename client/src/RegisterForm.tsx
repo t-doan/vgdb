@@ -57,6 +57,12 @@ export function Register() {
               <div>
                 <input required name="password" type="password" />
               </div>
+              <div>
+                <label className="text-white text-2xl">Bio</label>
+              </div>
+              <div>
+                <input required name="bio" type="text" />
+              </div>
               <div className="p-4 flex justify-center">
                 <button
                   className="text-black bg-white border-1 border-solid border-black p-[0.1rem]"
