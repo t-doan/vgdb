@@ -23,9 +23,7 @@ export function GameDetail() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `https://api.rawg.io/api/games/${gameId}?key=4a4f8ba8aaa144ff98854ca97003b2e2`
-        );
+        const response = await fetch(`/api/details/${gameId}`);
         if (!response.ok) {
           throw new Error(`Error ${response.status}`);
         }

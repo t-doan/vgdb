@@ -1,7 +1,18 @@
 import { FaChevronDown, FaThumbsUp } from 'react-icons/fa';
 // FaChevronUp; FaChevronUp; FaBars;
 import './ProfilePage.css';
+import { useEffect, useState } from 'react';
 
+export type User = {
+  userId: number;
+  username: string;
+  password: string;
+  profileImage: string;
+  bio: string;
+  createdAt: string;
+  gamePlayed: number;
+  currentPlay: string[];
+};
 export function ProfilePage() {
   return (
     <div className="container flex">
@@ -20,34 +31,54 @@ export function ProfilePage() {
 }
 
 function ProfileBanner() {
+  const [user, setUser] = useState<User>();
+  useEffect(() => {
+    async function load() {
+      const req = {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      };
+      const res = await fetch(`/api/user`, req);
+      if (!res.ok) throw new Error(`fetch Error ${res.status}`);
+      const temp = await res.json();
+      setUser(temp);
+    }
+    load();
+  }, []);
+  if (!user) {
+    return null;
+  }
   return (
     <div className="ProfileBanner w-[371px] h-[775px]">
       <div className="BannerContainer w-[371px] h-[775px] bg-gray-600 rounded-[42px] flex flex-col justify-evenly items-center">
         <div className="Ellipse2 w-[252.95px] h-[252.95px] bg-zinc-300 rounded-full">
           <img
             className="profileImage w-[252.95px] h-[252.95px] rounded-full"
-            src="https://preview.redd.it/gbm183bedns71.jpg?auto=webp&s=61a8e7832f9e4d822af5d94ae8647a7070c65599"
+            src={user?.profileImage}
             alt="placeholder"
           />
         </div>
         <div className="Username w-[252.95px] h-[53.98px] text-center text-white text-[33.73px] font-bold ">
-          <h1>My Name</h1>
+          <h1>{user?.username}</h1>
         </div>
         <div className="DateJoin w-[310.29px] h-[48.90px] text-center text-white text-xl font-normal">
-          <h1>Date Joined</h1>
+          <h1>{new Date(user?.createdAt).toLocaleDateString()}</h1>
         </div>
         <div className="GamesPlayed20 w-[258.01px] h-[37.10px] text-center text-white text-xl font-normal">
-          <h1>Games Played</h1>
+          <h1>Games Played: {user?.gamePlayed}</h1>
         </div>
         <div className="Bio w-[306.92px] h-[120.62px] bg-gray-700 rounded-[16.86px] text-center text-white text-[14.92px]">
           <h1>Bio</h1>
+          <h1>{user?.bio}</h1>
         </div>
         <div className="CurrentGames w-[306.92px] h-[142.62px] bg-gray-700 rounded-[16.86px] text-center text-white text-[18.92px] font-bold">
           <h1>Currently Playing</h1>
           <ul>
-            <li>Tetris</li>
-            <li>Baldur's Gate 3</li>
-            <li>Candy Crush</li>
+            <li>{user?.currentPlay[0]}</li>
+            <li>{user?.currentPlay[1]}</li>
+            <li>{user?.currentPlay[2]}</li>
           </ul>
         </div>
       </div>

@@ -22,7 +22,7 @@ function ListAllGame() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/apiData/${currentPage}`);
+        const response = await fetch(`/api/games/${currentPage}`);
         if (!response.ok) {
           throw new Error(`Error ${response.status}`);
         }
