@@ -190,8 +190,8 @@ function NextButton({ onNext }: NextButtonProps) {
 
 function AddFav() {
   return (
-    <div className="text-white hover:text-red-600 w-0 hover:cursor-pointer">
-      <FaHeart className="relative bottom-8 z-50 text-3xl " />
+    <div className="text-white hover:text-red-600 w-0 hover:cursor-pointer relative bottom-8 z-50 text-3xl">
+      <FaHeart />
     </div>
   );
 }
