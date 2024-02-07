@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { User } from './ProfilePage';
 
 export type Game = {
   id: number;
@@ -18,6 +19,28 @@ function ListAllGame() {
   const [currentGames, setGames] = useState<Game[]>([]);
   const [error, setError] = useState<unknown>();
   const [isLoading, setLoading] = useState<boolean>();
+
+  const [user, setUser] = useState<User>();
+
+  useEffect(() => {
+    async function load() {
+      if (!localStorage.getItem('token')) {
+        setUser(undefined);
+        return;
+      }
+      const req = {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      };
+      const res = await fetch(`/api/user`, req);
+      if (!res.ok) throw new Error(`fetch Error ${res.status}`);
+      const temp = await res.json();
+      setUser(temp);
+    }
+    load();
+  }, [user]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,7 +74,7 @@ function ListAllGame() {
 
   return (
     <>
-      <Card GameList={currentGames} />
+      <Card GameList={currentGames} user={user} />
       <Pagination currentPage={currentPage} setPage={setPage} />
     </>
   );
@@ -59,16 +82,14 @@ function ListAllGame() {
 
 type CardProp = {
   GameList: Game[];
+  user?: User;
 };
-function Card({ GameList }: CardProp) {
+function Card({ GameList, user }: CardProp) {
   const temp: JSX.Element[] = [];
   for (let i = 0; i < GameList.length; i++) {
     temp.push(
-      <Link
-        to={`/details/${GameList[i].id}`}
-        state={{ game: GameList[i] }}
-        key={GameList[i].id}>
-        <li className="w-96 mb-11 hover:cursor-pointer">
+      <li className="w-96 mb-11" key={GameList[i].id}>
+        <Link to={`/details/${GameList[i].id}`} state={{ game: GameList[i] }}>
           <h1 className="text-white text-xl font-semibold hover:underline hover:text-yellow-200">
             {GameList[i].name}
             <img
@@ -80,8 +101,9 @@ function Card({ GameList }: CardProp) {
               alt={GameList[i].name}
             />
           </h1>
-        </li>
-      </Link>
+        </Link>
+        {user && <AddFav />}
+      </li>
     );
   }
   return (
@@ -163,5 +185,13 @@ function NextButton({ onNext }: NextButtonProps) {
     <button onClick={onNext} className="join-item btn">
       Next
     </button>
+  );
+}
+
+function AddFav() {
+  return (
+    <div className="text-white hover:text-red-600 w-0 hover:cursor-pointer">
+      <FaHeart className="relative bottom-8 z-50 text-3xl " />
+    </div>
   );
 }
