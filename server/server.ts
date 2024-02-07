@@ -126,16 +126,6 @@ app.post(`/api/auth/sign-up`, async (req, res, next) => {
     ];
     const result = await db.query<User>(sql, params);
     const [user] = result.rows;
-
-    const sql2 = `
-    insert into "lists"("type", "userId")
-    values($1, $2)
-    returning *;`;
-    const params2 = ['favorites', user.userId];
-    const result2 = await db.query(sql2, params2);
-    const [list] = result2.rows;
-
-    res.status(201).json(list);
     res.status(201).json(user);
   } catch (err) {
     next(err);
