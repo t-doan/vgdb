@@ -35,163 +35,187 @@ app.use(express.static(reactStaticDir));
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
-// app.get('/api/games/:page', async (req, res, next) => {
-//   try {
-//     const pageNumber = +req.params.page;
-//     const response = await fetch(
-//       `https://api.rawg.io/api/games?key=4a4f8ba8aaa144ff98854ca97003b2e2&page_size=20&page=${pageNumber}`
-//     );
-//     if (!response.ok) {
-//       next(new Error(response.status.toString()));
-//     } else {
-//       const result = await response.json();
-//       res.json(result);
-//     }
-//   } catch (e) {
-//     next(e);
-//   }
-// });
+app.get('/api/games/:page', async (req, res, next) => {
+  try {
+    const pageNumber = +req.params.page;
+    const response = await fetch(
+      `https://api.rawg.io/api/games?key=4a4f8ba8aaa144ff98854ca97003b2e2&page_size=20&page=${pageNumber}`
+    );
+    if (!response.ok) {
+      next(new Error(response.status.toString()));
+    } else {
+      const result = await response.json();
+      res.json(result);
+    }
+  } catch (e) {
+    next(e);
+  }
+});
 
-// app.get('/api/details/:id', async (req, res, next) => {
-//   try {
-//     const gameId = +req.params.id;
-//     const response = await fetch(
-//       `https://api.rawg.io/api/games/${gameId}?key=4a4f8ba8aaa144ff98854ca97003b2e2`
-//     );
-//     if (!response.ok) {
-//       next(new Error(response.status.toString()));
-//     } else {
-//       const result = await response.json();
-//       res.json(result);
-//     }
-//   } catch (e) {
-//     next(e);
-//   }
-// });
+app.get('/api/details/:id', async (req, res, next) => {
+  try {
+    const gameId = +req.params.id;
+    const response = await fetch(
+      `https://api.rawg.io/api/games/${gameId}?key=4a4f8ba8aaa144ff98854ca97003b2e2`
+    );
+    if (!response.ok) {
+      next(new Error(response.status.toString()));
+    } else {
+      const result = await response.json();
+      res.json(result);
+    }
+  } catch (e) {
+    next(e);
+  }
+});
 
-// app.get('/api/search', async (req, res, next) => {
-//   try {
-//     const { query } = req.query;
-//     const response = await fetch(
-//       `https://api.rawg.io/api/games?key=4a4f8ba8aaa144ff98854ca97003b2e2&search=${query}`
-//     );
+app.get('/api/search', async (req, res, next) => {
+  try {
+    const { query } = req.query;
+    const response = await fetch(
+      `https://api.rawg.io/api/games?key=4a4f8ba8aaa144ff98854ca97003b2e2&search=${query}`
+    );
 
-//     if (!response.ok) {
-//       next(new Error(response.status.toString()));
-//     } else {
-//       const result = await response.json();
-//       res.json(result.results);
-//     }
-//   } catch (e) {
-//     next(e);
-//   }
-// });
+    if (!response.ok) {
+      next(new Error(response.status.toString()));
+    } else {
+      const result = await response.json();
+      res.json(result.results);
+    }
+  } catch (e) {
+    next(e);
+  }
+});
 
-// type User = {
-//   userId: number;
-//   username: string;
-//   password: string;
-//   profileImage: string;
-//   bio: string;
-//   createdAt: string;
-//   gamePlayed: number;
-//   currentPlay: string[];
-// };
+type User = {
+  userId: number;
+  username: string;
+  password: string;
+  profileImage: string;
+  bio: string;
+  createdAt: string;
+  gamePlayed: number;
+  currentPlay: string[];
+};
 
-// app.post(`/api/auth/sign-up`, async (req, res, next) => {
-//   try {
-//     const { username, password, profileImage, bio, gamePlayed, currentPlay } =
-//       req.body as Partial<User>;
-//     if (!username || !password) {
-//       throw new ClientError(400, 'username and password are required fields');
-//     }
-//     const date = new Date();
-//     const dateCreated = `${date.getDate()}-${
-//       date.getMonth() + 1
-//     }-${date.getFullYear()}`;
-//     const hashedPassword = await argon2.hash(password);
-//     const sql = `
-//     insert into "users"("username", "password", "createdAt", "profileImage", "bio", "gamePlayed", "currentPlay"
-//     )
-//     values ($1 , $2, $3, $4, $5, $6, $7)
-//     returning *;`;
-//     const params = [
-//       username,
-//       hashedPassword,
-//       dateCreated,
-//       profileImage,
-//       bio,
-//       gamePlayed,
-//       currentPlay,
-//     ];
-//     const result = await db.query<User>(sql, params);
-//     const [user] = result.rows;
-//     res.status(201).json(user);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+app.post(`/api/auth/sign-up`, async (req, res, next) => {
+  try {
+    const { username, password, profileImage, bio, gamePlayed, currentPlay } =
+      req.body as Partial<User>;
+    if (!username || !password) {
+      throw new ClientError(400, 'username and password are required fields');
+    }
+    const date = new Date();
+    const dateCreated = `${date.getDate()}-${
+      date.getMonth() + 1
+    }-${date.getFullYear()}`;
+    const hashedPassword = await argon2.hash(password);
+    const sql = `
+    insert into "users"("username", "password", "createdAt", "profileImage", "bio", "gamePlayed", "currentPlay"
+    )
+    values ($1 , $2, $3, $4, $5, $6, $7)
+    returning *;`;
+    const params = [
+      username,
+      hashedPassword,
+      dateCreated,
+      profileImage,
+      bio,
+      gamePlayed,
+      currentPlay,
+    ];
+    const result = await db.query<User>(sql, params);
+    const [user] = result.rows;
+    res.status(201).json(user);
+  } catch (err) {
+    next(err);
+  }
+});
 
-// type Auth = {
-//   username: string;
-//   password: string;
-// };
-// app.post('/api/auth/sign-in', async (req, res, next) => {
-//   try {
-//     const { username, password } = req.body as Partial<Auth>;
-//     if (!username || !password) {
-//       throw new ClientError(401, 'invalid login');
-//     }
+type Auth = {
+  username: string;
+  password: string;
+};
+app.post('/api/auth/sign-in', async (req, res, next) => {
+  try {
+    const { username, password } = req.body as Partial<Auth>;
+    if (!username || !password) {
+      throw new ClientError(401, 'invalid login');
+    }
 
-//     const sql = `
-//     select "userId", "password"
-//     from "users"
-//     where "username" = $1
-//     `;
-//     const params = [username];
-//     const result = await db.query<User>(sql, params);
-//     const [user] = result.rows;
-//     if (!user) {
-//       throw new ClientError(401, 'Invalid login');
-//     } else {
-//       const isPasswordValid = await argon2.verify(user.password, password);
-//       if (!isPasswordValid) {
-//         throw new ClientError(401, 'Invalid login');
-//       } else {
-//         const payload = {
-//           userId: user.userId,
-//           username,
-//         };
-//         const token = jwt.sign(payload, hashKey);
-//         res.status(200).json({
-//           token,
-//           user: payload,
-//         });
-//       }
-//     }
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+    const sql = `
+    select "userId", "password"
+    from "users"
+    where "username" = $1
+    `;
+    const params = [username];
+    const result = await db.query<User>(sql, params);
+    const [user] = result.rows;
+    if (!user) {
+      throw new ClientError(401, 'Invalid login');
+    } else {
+      const isPasswordValid = await argon2.verify(user.password, password);
+      if (!isPasswordValid) {
+        throw new ClientError(401, 'Invalid login');
+      } else {
+        const payload = {
+          userId: user.userId,
+          username,
+        };
+        const token = jwt.sign(payload, hashKey);
+        res.status(200).json({
+          token,
+          user: payload,
+        });
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+});
 
-// app.get('/api/user', authMiddleware, async (req, res, next) => {
-//   try {
-//     const sql = `select *
-//     from "users"
-//     where "userId" = $1`;
-//     const params = [req.user?.userId];
-//     const result = await db.query<User>(sql, params);
+app.get('/api/user', authMiddleware, async (req, res, next) => {
+  try {
+    const sql = `select *
+    from "users"
+    where "userId" = $1`;
+    const params = [req.user?.userId];
+    const result = await db.query<User>(sql, params);
 
-//     const temp = result.rows[0];
-//     if (!temp) {
-//       throw new ClientError(404, 'Not found.');
-//     } else {
-//       res.status(201).json(result.rows[0]);
-//     }
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+    const temp = result.rows[0];
+    if (!temp) {
+      throw new ClientError(404, 'Not found.');
+    } else {
+      res.status(201).json(result.rows[0]);
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+type List = {
+  type: string;
+  userId: number;
+  listId: number;
+};
+app.post('api/list', authMiddleware, async (req, res, next) => {
+  try {
+    const sql = `insert into "list" ("type", "userId", "listId")
+    values($1, $2, $3)
+    returning *;`;
+    const params = [req.user?.userId];
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.put('api/addlist/:listId', async (req, res, next) => {
+  try {
+    const listId = req.params.listId;
+  } catch (e) {
+    next(e);
+  }
+});
 
 /*
  * Middleware that handles paths that aren't handled by static middleware
