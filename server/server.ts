@@ -203,28 +203,29 @@ app.get('/api/user', authMiddleware, async (req, res, next) => {
   }
 });
 
-// type List = {
-//   type:string;
-//   userId:number;
-//   listId:number;
-// };
-// app.post('api/list', authMiddleware, async (req, res, next) =>{
-//   try{
-//     const sql = `insert into "list" ("type", "userId", "listId")
-//     values($1, $2, $3)
-//     returning *;`;
-//     const params = [req.user?.userId,]
-//   }
-//   catch(err){
-//     next(err);
-//   }
-// })
+type List = {
+  type: string;
+  userId: number;
+  listId: number;
+};
+app.post('api/list', authMiddleware, async (req, res, next) => {
+  try {
+    const sql = `insert into "list" ("type", "userId", "listId")
+    values($1, $2, $3)
+    returning *;`;
+    const params = [req.user?.userId];
+  } catch (err) {
+    next(err);
+  }
+});
 
-// app.put('api/addlist/:listId', async (req, res, next) => {
-//   try{
-//     const listId = req.params.listId;
-//   }
-// })
+app.put('api/addlist/:listId', async (req, res, next) => {
+  try {
+    const listId = req.params.listId;
+  } catch (e) {
+    next(e);
+  }
+});
 
 /*
  * Middleware that handles paths that aren't handled by static middleware
