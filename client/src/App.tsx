@@ -1,10 +1,10 @@
 import { ProfilePage, User } from './ProfilePage';
 import './App.css';
 import { Register } from './RegisterForm';
-// import { Home } from './HomePage';
+import { Home } from './HomePage';
 import { Routes, Route } from 'react-router-dom';
-// import { GameDetail } from './GameDetail';
-// import { Header } from './Header';
+import { GameDetail } from './GameDetail';
+import { Header } from './Header';
 import { Login } from './LoginForm';
 import { useEffect, useState } from 'react';
 
@@ -32,13 +32,13 @@ export default function App() {
 
   return (
     <Routes>
-      {/* <Route path="/" element={<Header user={user} setUser={setUser} />}> */}
-      {/* <Route index element={<Home />} /> */}
-      <Route path="/user" element={<ProfilePage />} />
-      <Route path="/signup" element={<Register />} />
-      <Route path="/login" element={<Login setLogin={setUser} />} />
-      {/* <Route path="/details/:gameId" element={<GameDetail />} /> */}
-      {/* </Route> */}
+      <Route path="/" element={<Header user={user} setUser={setUser} />}>
+        <Route index element={<Home />} />
+        <Route path="/user" element={<ProfilePage />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="/login" element={<Login setLogin={setUser} />} />
+        <Route path="/details/:gameId" element={<GameDetail />} />
+      </Route>
     </Routes>
   );
 }
