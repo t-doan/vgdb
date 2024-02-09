@@ -1,8 +1,10 @@
 import { FormEvent, useState } from 'react';
 import './App.css';
+import { useNavigate } from 'react-router-dom';
 
 export function Register() {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -21,6 +23,7 @@ export function Register() {
       }
       const user = await res.json();
       console.log('Registered', user);
+      navigate('/');
     } catch (err) {
       alert(`Error registering user: ${err}`);
     } finally {
@@ -57,12 +60,12 @@ export function Register() {
               <div>
                 <input required name="password" type="password" />
               </div>
-              <div>
+              {/* <div>
                 <label className="text-white text-2xl">Bio</label>
-              </div>
-              <div>
+              </div> */}
+              {/* <div>
                 <input required name="bio" type="text" />
-              </div>
+              </div> */}
               <div className="p-4 flex justify-center">
                 <button
                   className="text-black bg-white border-1 border-solid border-black p-[0.1rem]"

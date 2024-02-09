@@ -9,3 +9,6 @@
 
   insert into "list"("type", "userId")
   values('favorite', 1);
+
+  -- insert into "listGames"("listId", "gameId")
+  -- values(1, '{4200, 3498, 32}');
