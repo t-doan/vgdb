@@ -189,9 +189,29 @@ function NextButton({ onNext }: NextButtonProps) {
 }
 
 function AddFav() {
+  const [, setError] = useState<unknown>();
+  const [, setLoading] = useState<boolean>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const api = await fetch(`api/addlist/1`);
+        if (!api.ok) {
+          throw new Error(`Error ${api.status}`);
+        }
+        return await api.json();
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div className="text-white hover:text-red-600 w-0 hover:cursor-pointer relative bottom-8 z-50 text-3xl">
-      <FaHeart />
+    <div className="text-yellow-100 hover:text-red-600 w-0 hover:cursor-pointer relative bottom-8 z-50 text-3xl">
+      {<FaHeart />}
     </div>
   );
 }

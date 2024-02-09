@@ -73,14 +73,14 @@ function ProfileBanner() {
           <h1>Bio</h1>
           <h1>{user?.bio}</h1>
         </div>
-        <div className="CurrentGames w-[306.92px] h-[142.62px] bg-gray-700 rounded-[16.86px] text-center text-white text-[18.92px] font-bold">
+        {/* <div className="CurrentGames w-[306.92px] h-[142.62px] bg-gray-700 rounded-[16.86px] text-center text-white text-[18.92px] font-bold">
           <h1>Currently Playing</h1>
           <ul>
             <li>{user?.currentPlay[0]}</li>
             <li>{user?.currentPlay[1]}</li>
             <li>{user?.currentPlay[2]}</li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   );

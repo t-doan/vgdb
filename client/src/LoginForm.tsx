@@ -36,6 +36,7 @@ export function Login({ setLogin }: LoginProp) {
       setIsLoading(false);
     }
   }
+
   return (
     <div className="container mx-auto mt-28 flex justify-center">
       <div className="w-96 h-60 bg-black ">
@@ -49,13 +50,13 @@ export function Login({ setLogin }: LoginProp) {
                 <label className="text-white text-2xl">Username</label>
               </div>
               <div>
-                <input required name="username" type="text" />
+                <input required name="username" type="text" value={'anon'} />
               </div>
               <div>
                 <label className="text-white text-2xl">Password</label>
               </div>
               <div>
-                <input required name="password" type="password" />
+                <input required name="password" type="password" value="false" />
               </div>
               <div className="p-4 flex justify-center">
                 <button
