@@ -1,4 +1,4 @@
-# final-project
+# VGDB
 
 A full stack TypeScript project that leverages Rawg.io API to create a database web application designed to provide users an experience in searching for their favorite video games.
 
@@ -33,7 +33,6 @@ This project uses
 
 3.  NodeFetch
     This project used Node v.18 so fetch is not usable so this package allows the uses of Fetch
-
 
     ```
     npm i node-fetch
